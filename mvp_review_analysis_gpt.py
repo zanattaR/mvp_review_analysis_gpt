@@ -46,7 +46,7 @@ if reviewSheet is not None:
     list_reviews = make_reviews(df_reviews)
 
     # Particionar lotes de reviews para serem enviados em conjunto na API
-    lotes_reviews = coletar_lotes(list_reviews,1)
+    #lotes_reviews = coletar_lotes(list_reviews,1)
 
     # Criação de contexto para o modelo. A função recebe as classes para compor o texto
     system  = create_system()
