@@ -65,6 +65,8 @@ if st.button('Gerar Classificações'):
     # Request na API p/ gerar classificações
     results = asyncio.run(get_chatgpt_responses(system, list_reviews))
 
+    st.write(pd.DataFrame(results))
+
     # Normalização de resultados recebidos pela API
     str_results = normalize_results(results)
 
