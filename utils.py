@@ -29,6 +29,30 @@ def replace_column_with_review(df_reviews, list_string):
             df_reviews.rename(columns={column: "Review"}, inplace=True)
     return df_reviews
 
+# Função para remover subcategorias genéricas
+def check_col_subcategory(df_reviews):
+    list_generic = ['Generic','Genérico','Reclamação Genérica','Elogio Genérico','Generic complaint','Generic compliment']
+    
+    if 'Subcategory' in df_reviews.columns:
+        df_reviews = df_reviews[~df_reviews['Subcategory'].isin(list_generic)]
+        df_reviews.reset_index(drop=True, inplace=True)
+        return df_reviews
+    else:
+        return df_reviews
+
+# Função para pegar uma amostra de reviews baseada na proporção de estrelas
+def prop_rating(df_reviews):
+    
+    if 'Rating' in df_reviews.columns:        
+        if df_reviews.shape[0] > 100:            
+            df_reviews = train_test_split(df_reviews, train_size=100, stratify=df_reviews['Rating'])[0]
+            df_reviews.reset_index(drop=True, inplace=True)
+            return df_reviews
+        else:
+            return df_reviews
+    else:
+        return df_reviews
+
 # Função que recebe o dataframe de reviews e adiciona a string 'Comentário: ', retornando uma lista dos reviews
 def make_reviews(df_reviews):
     list_reviews = []
