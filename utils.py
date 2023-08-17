@@ -46,8 +46,8 @@ def check_col_subcategory(df_reviews):
 def prop_rating(df_reviews):
     
     if 'Rating' in df_reviews.columns:        
-        if df_reviews.shape[0] > 100:            
-            df_reviews = train_test_split(df_reviews, train_size=100, stratify=df_reviews['Rating'])[0]
+        if df_reviews.shape[0] > 500:            
+            df_reviews = train_test_split(df_reviews, train_size=500, stratify=df_reviews['Rating'])[0]
             df_reviews.reset_index(drop=True, inplace=True)
             return df_reviews
         else:
@@ -156,7 +156,17 @@ def replace_errors_with_nan(df_reviews, df_classes, group='', group_class=''):
     return df_reviews
 
 
+# Função para exatrair tokens utilizados 
+def filter_dataframe(results):
+    
+    prompt_tokens = results['usage']['prompt_tokens']
+    completion_tokens = results['usage']['completion_tokens']
+    total_tokens = results['usage']['total_tokens']
+    df_results_tokens = pd.DataFrame({'prompt_tokens': prompt_tokens,
+                          'completion_tokens': completion_tokens,
+                          'total_tokens': total_tokens}, index=[0])
 
+    return df_results_tokens
 
 
 

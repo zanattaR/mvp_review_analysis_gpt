@@ -22,9 +22,9 @@ reviewSheet = st.file_uploader("Insira um arquivo .xlsx com os reviews a serem c
 if reviewSheet is not None:
     df_reviews = pd.read_excel(reviewSheet)
 
-    # Lendo reviews e verificando se há mais de 100 registros
-    if df_reviews.shape[0] > 100:
-        st.warning("Há mais de 100 reviews nesta base, a classificação só será feita com os 100 primeiros. ")
+    # Lendo reviews e verificando se há mais de 500 registros
+    if df_reviews.shape[0] > 500:
+        st.warning("Há mais de 500 reviews nesta base, a classificação só será feita com os 500 primeiros. ")
 
     # Filtrando os 100 primeiros reviews
     #df_reviews = df_reviews.iloc[:100]
@@ -67,6 +67,12 @@ if st.button('Gerar Classificações'):
 
     # Normalização de resultados recebidos pela API
     str_results = normalize_results(results)
+
+    df_results_tokens = filter_dataframe(results)
+
+    st.write('Tokens no prompt:',df_results_tokens['prompt_tokens'][0])
+    st.write('Tokens na resposta:',df_results_tokens['completion_tokens'][0])
+    st.write('Total de tokens utilizados:',df_results_tokens['total_tokens'][0])
 
     st.write(convert_string(str_results))
 
