@@ -5,4 +5,4 @@ xlsxwriter==3.0.3
 openpyxl
 asyncio
 aiohttp
-scikit-learn==0.23.0
+scikit-learn
