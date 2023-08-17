@@ -7,6 +7,7 @@ import asyncio
 import aiohttp
 import json
 import streamlit as st
+from sklearn.model_selection import train_test_split
 
 # Função para transformar df em excel
 def to_excel(df):
