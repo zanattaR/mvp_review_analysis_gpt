@@ -10,6 +10,8 @@ import asyncio
 import aiohttp
 from utils import *
 import time
+import sklearn
+from sklearn.model_selection import train_test_split
 
 st.title("Review Analysis GPT")
 st.write('Esta aplicação tem como objetivo auxiliar na análise de reviews com o uso de IA')
