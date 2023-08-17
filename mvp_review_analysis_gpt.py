@@ -24,7 +24,7 @@ if reviewSheet is not None:
 
     # Lendo reviews e verificando se há mais de 100 registros
     if df_reviews.shape[0] > 100:
-        st.warning("Há mais de 100 reviews nesta base, a classificação só será feita com os 100 primeiros.")
+        st.warning("Há mais de 100 reviews nesta base, a classificação só será feita com os 100 primeiros. ")
 
     # Filtrando os 100 primeiros reviews
     #df_reviews = df_reviews.iloc[:100]
