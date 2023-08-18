@@ -46,8 +46,8 @@ def check_col_subcategory(df_reviews):
 def prop_rating(df_reviews):
     
     if 'Rating' in df_reviews.columns:        
-        if df_reviews.shape[0] > 500:            
-            df_reviews = train_test_split(df_reviews, train_size=500, stratify=df_reviews['Rating'])[0]
+        if df_reviews.shape[0] > 300:            
+            df_reviews = train_test_split(df_reviews, train_size=300, stratify=df_reviews['Rating'])[0]
             df_reviews.reset_index(drop=True, inplace=True)
             return df_reviews
         else:
@@ -90,7 +90,7 @@ async def get_data(session, body_mensagem):
 async def get_chatgpt_responses(system, list_reviews):
     
     url_base = "https://api.openai.com"
-    id_modelo = "gpt-4-32k"
+    id_modelo = "gpt-3.5-turbo-16k"
     
     session = aiohttp.ClientSession(url_base)
 

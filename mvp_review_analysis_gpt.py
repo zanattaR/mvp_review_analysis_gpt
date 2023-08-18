@@ -18,13 +18,13 @@ st.write('Esta aplicação tem como objetivo auxiliar na análise de reviews com
 st.write()
 
 # Inserindo arquivo de reviews
-reviewSheet = st.file_uploader("Insira um arquivo .xlsx com os reviews a serem classificados (Máx: 100 reviews)")
+reviewSheet = st.file_uploader("Insira um arquivo .xlsx com os reviews a serem analisados (Máx: 300 reviews)")
 if reviewSheet is not None:
     df_reviews = pd.read_excel(reviewSheet)
 
     # Lendo reviews e verificando se há mais de 500 registros
-    if df_reviews.shape[0] > 500:
-        st.warning("Há mais de 500 reviews nesta base, a classificação só será feita com os 500 primeiros. ")
+    if df_reviews.shape[0] > 300:
+        st.warning("Há mais de 300 reviews nesta base, a análise só será feita com uma amostra de 300 reviews. ")
 
     # Filtrando os 100 primeiros reviews
     #df_reviews = df_reviews.iloc[:100]
@@ -60,21 +60,21 @@ if reviewSheet is not None:
     system  = create_system()
 
 ############# Tratamento e preparação de dados #############
-if st.button('Gerar Classificações'):
+if st.button('Gerar Análise'):
 
     # Request na API p/ gerar classificações
     results = asyncio.run(get_chatgpt_responses(system, list_reviews))
 
-    st.write(pd.DataFrame(results))
+    #st.write(pd.DataFrame(results)) # TESTE DO GPT-4
 
     # Normalização de resultados recebidos pela API
     str_results = normalize_results(results)
 
-    df_results_tokens = filter_dataframe(results)
+    #df_results_tokens = filter_dataframe(results) # TESTE DO GPT-4
 
-    st.write('Tokens no prompt:',df_results_tokens['prompt_tokens'][0])
-    st.write('Tokens na resposta:',df_results_tokens['completion_tokens'][0])
-    st.write('Total de tokens utilizados:',df_results_tokens['total_tokens'][0])
+    #st.write('Tokens no prompt:',df_results_tokens['prompt_tokens'][0]) # TESTE DO GPT-4
+    #st.write('Tokens na resposta:',df_results_tokens['completion_tokens'][0]) # TESTE DO GPT-4
+    #st.write('Total de tokens utilizados:',df_results_tokens['total_tokens'][0]) # TESTE DO GPT-4
 
     st.write(convert_string(str_results))
 
